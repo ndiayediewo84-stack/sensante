@@ -40,3 +40,8 @@ for diag , temp in temp_by_diag . items () :
  print (" Exploration terminee !")
  print (" Prochain lab : entrainer un modele ML")
  print ( f"{ '= ' * 50}")
+# ----- ANALYSE PAR SEXE ET DIAGNOSTIC -----
+print(f"\n--- Nombre de patients par sexe et diagnostic ---")
+# On groupe par deux colonnes et on compte la taille de chaque groupe
+analyse_sexe = df.groupby(["sexe", "diagnostic"]).size()
+print(analyse_sexe)
