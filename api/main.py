@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel , Field
 import joblib
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
 # Creer l' application
 app =FastAPI(
 title ="SenSante API",
@@ -108,4 +109,11 @@ la probabilite et une recommandation .
   probabilite = round(proba_max , 2) ,
   confiance = confiance,
   message = messages.get(diagnostic , "Consultez un medecin .")
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins     = ["*"],  # En dev : tout accepter
+    allow_credentials = True,
+    allow_methods     = ["*"],
+    allow_headers     = ["*"],
 )
