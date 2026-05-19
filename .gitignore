@@ -18,4 +18,5 @@ Thumbs . db
 !figures/*.png
 
 # Cles API - NE JAMAIS COMMITTER
-.env
+.envmodels/model.pkl
+models/model.pkl
