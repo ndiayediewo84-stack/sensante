@@ -10,6 +10,8 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 from groq import Groq
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 # Charger les variables d'environnement
 load_dotenv()
@@ -185,6 +187,7 @@ def explain(data: ExplainInput):
             ),
             modele_llm="aucun"
         )
+    
 
     user_prompt = (
         f"Patient : {data.sexe}, {data.age} ans, "
@@ -213,3 +216,10 @@ def explain(data: ExplainInput):
     return ExplainOutput(explication=explication)
 
 
+
+# Après la création de app et middleware, AVANT les routes :
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/")
+def read_root():
+    return FileResponse("static/index.html")
